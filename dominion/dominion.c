@@ -644,10 +644,10 @@ int getCost(int cardNumber)
 }
 
 // Refactored: Smithy card function.
-int cardSmithy(struct gameState *state, int handPos, int currentPlayer)
+int cardSmithy(int i, struct gameState *state, int handPos, int currentPlayer)
 {
 	//+3 Cards
-	for (i = 0; i < 3; i++)
+        for (i = 0; i < 3; i++)
 	{
 		drawCard(currentPlayer, state);
 	}
@@ -658,7 +658,7 @@ int cardSmithy(struct gameState *state, int handPos, int currentPlayer)
 }
 
 // Refactored: Adventurer card function.
-int cardAdventurer(struct gameState *state, int handPos, int currentPlayer, int drawnTreasure, int cardDrawn)
+int cardAdventurer(struct gameState *state, int* temphand, int handPos, int currentPlayer, int drawnTreasure, int cardDrawn, int tempCardCount)
 {
 	while (drawnTreasure < 2) {
 		if (state->deckCount[currentPlayer] < 1) {//if the deck is empty we need to shuffle discard and add to deck
@@ -669,19 +669,19 @@ int cardAdventurer(struct gameState *state, int handPos, int currentPlayer, int 
 		if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 			drawnTreasure++;
 		else {
-			temphand[z] = cardDrawn;
+			temphand[tempCardCount] = cardDrawn;
 			state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-			z++;
+			tempCardCount++;
 		}
 	}
-	while (z - 1 >= 0) {
-		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1]; // discard all cards in play that have been drawn
-		z = z - 1;
+	while (tempCardCount - 1 >= 0) {
+		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[tempCardCount - 1]; // discard all cards in play that have been drawn
+		tempCardCount = tempCardCount - 1;
 	}
 	return 0;
 }
 
-int cardCouncilRoom(struct gameState *state, int handPos, int currentPlayer) {
+int cardCouncilRoom(int i, struct gameState *state, int handPos, int currentPlayer) {
 	
 	// +4 Cards
 	for (i = 0; i < 4; i++)
@@ -730,11 +730,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card ) 
     {
     case adventurer:
-		cardAdventurer(state, handPos, currentPlayer, drawntreasure, cardDrawn);
+      cardAdventurer(state, temphand, handPos, currentPlayer, drawntreasure, cardDrawn, z);
 		break;
 			
     case council_room:
-		cardCouncilRoom();
+      cardCouncilRoom(i, state, handPos, currentPlayer);
 		break;
 			
     case feast:
@@ -855,7 +855,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
 	case smithy:
-		cardSmithy(state, handPos, currentPlayer);
+	  cardSmithy(i, state, handPos, currentPlayer);
 		break;
 
     case village:

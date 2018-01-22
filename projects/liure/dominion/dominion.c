@@ -649,7 +649,7 @@ int cardSmithy(int i, struct gameState *state, int handPos, int currentPlayer)
 	//+3 Cards
         for (i = 0; i < 3; i++)
 	{
-		drawCard(currentPlayer, state);
+		drawCard(currentPlayer + 1, state);
 	}
 
 	//discard card from hand
@@ -661,7 +661,7 @@ int cardSmithy(int i, struct gameState *state, int handPos, int currentPlayer)
 int cardAdventurer(struct gameState *state, int* temphand, int handPos, int currentPlayer, int drawnTreasure, int cardDrawn, int tempCardCount)
 {
 	while (drawnTreasure < 2) {
-		if (state->deckCount[currentPlayer] < 1) {//if the deck is empty we need to shuffle discard and add to deck
+		if (state->deckCount[currentPlayer] <= 1) {//if the deck is empty we need to shuffle discard and add to deck
 			shuffle(currentPlayer, state);
 		}
 		drawCard(currentPlayer, state);
@@ -695,7 +695,7 @@ int cardCouncilRoom(int i, struct gameState *state, int handPos, int currentPlay
 	//Each other player draws a card
 	for (i = 0; i < state->numPlayers; i++)
 	{
-		if (i != currentPlayer)
+		if (i == currentPlayer)
 		{
 			drawCard(i, state);
 		}
@@ -731,7 +731,7 @@ int cardFeast(int i, int x, int choice1, int* temphand, struct gameState *state,
       //Update Coins for Buy
       updateCoins(currentPlayer, state, 5);
       x = 1;//Condition to loop on
-      while( x == 1) {//Buy one card
+      while(x == 1) {//Buy one card
 	if (supplyCount(choice1, state) <= 0){
 	  if (DEBUG)
 	    printf("None of that card left, sorry!\n");
@@ -754,7 +754,7 @@ int cardFeast(int i, int x, int choice1, int* temphand, struct gameState *state,
 	  }
 
 	  gainCard(choice1, state, 0, currentPlayer);//Gain the card
-	  x = 0;//No more buying cards
+	  x = 1;//No more buying cards
 
 	  if (DEBUG){
 	    printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);

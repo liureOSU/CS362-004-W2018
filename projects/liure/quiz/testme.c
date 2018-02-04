@@ -5,7 +5,7 @@
 
 char inputChar()
 {
-	int newRand = rand();
+  	int newRand = rand();
 	if ((newRand % 10 + 1) == 1) {
 		return '[';
 	}

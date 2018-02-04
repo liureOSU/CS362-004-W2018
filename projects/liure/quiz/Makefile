@@ -1,6 +1,3 @@
-randomq:
-	randomquiz.c -o randomquiz -std=c99
-
-all:
-	randomq
-	./randomquiz
+randomquiz:
+	gcc testme.c -o testme -std=c99
+	./testme

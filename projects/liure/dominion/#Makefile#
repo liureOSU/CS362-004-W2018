@@ -50,11 +50,10 @@ runrandomtest: randomtestcard1 randomtestcard2 randomtestadventurer dominion.o r
 	./randomtestcard1 > randomtestcard1.out
 	./randomtestcard2 > randomtestcard2.out
 	./randomtestadventurer > randomtestadventurer.out
-	gcov -bcf dominion.c > temphold
-	cat temphold >> randomtestcard1.out
-	cat temphold >> randomtestcard2.out
-	cat temphold >> randomtestadventurer.out
-	rm -f temphold
+	gcov -bcf dominion.c > 2
+	cat dominion.c.gcov >> randomtestcard1.out
+	cat dominion.c.gcov >> randomtestcard2.out
+	cat dominion.c.gcov >> randomtestadventurer.out
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 

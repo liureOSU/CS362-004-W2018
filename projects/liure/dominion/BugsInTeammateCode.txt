@@ -1,0 +1,18 @@
+*************************************************
+*   Oregon State University
+*   CS362 - Software Engineering II
+*   Assignment 5
+*   2/28/2018
+*   liure - Reed Liu
+*************************************************
+
+Unit Tests:
+
+	- SMITHY: Bug found where the player gains four instead of three cards.
+	- ADVENTURER: Found a bug where more cards are discarded than should be discarded after card is played.
+
+Random Tests:
+
+	- ADVENTURER: 5878 failed runs out of 10000 runs.
+		      Bug occurs when the current player has 10 or more cards in hand.d  Max hand size is
+		      stuck at 9. 

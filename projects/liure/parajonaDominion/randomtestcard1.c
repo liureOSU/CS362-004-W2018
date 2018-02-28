@@ -67,7 +67,7 @@ int smithyTest(struct gameState* testGame, int seed, int player)
 	int randomHandPos = rand() & 6;
 	testGame->hand[player][randomHandPos] = smithy;
 
-	cardSmithy(i, testGame, randomHandPos, player);
+	effectSmithy (testGame, player, randomHandPos);
 
 	return 0;
 }

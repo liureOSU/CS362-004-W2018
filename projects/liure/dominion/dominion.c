@@ -649,7 +649,7 @@ int cardSmithy(int i, struct gameState *state, int handPos, int currentPlayer)
 	//+3 Cards
         for (i = 0; i < 3; i++)
 	{
-		drawCard(currentPlayer + 1, state);
+		drawCard(currentPlayer, state);
 	}
 
 	//discard card from hand

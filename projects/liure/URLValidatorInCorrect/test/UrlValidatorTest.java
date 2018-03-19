@@ -1,7 +1,7 @@
 /*****************************************************
  *    CS362: Software Engineering II
- *    Oregon State Univerisity
- *    Date: 2/18/2018
+ *    Oregon State University
+ *    Date: 3/18/2018
  *
  *    Final Project Part B: UrlValidator.isValid()
  *    Submitted by:
@@ -37,7 +37,7 @@ public class UrlValidatorTest extends TestCase {
       System.out.println(urlVal.isValid("http://www.google.com/mail"));
       System.out.println(urlVal.isValid("http://www.google.com/mail/test"));
       System.out.println("----------------------------------------------------");
-      
+
       //The ones listed here are all invalid URLs
       System.out.println("Expected to be false: ");
       System.out.println(urlVal.isValid("http://www.#!~+`=>@@#%google#.com"));
